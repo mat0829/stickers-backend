@@ -26,6 +26,8 @@ class Api::V1::TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
+      @task.name = @task.name.titleize
+      @task.save
       render json: @task, status: 200
     else
       render json: { :errors => @task.errors.full_messages }, status: :unprocessable_entity
