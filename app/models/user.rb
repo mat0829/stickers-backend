@@ -16,7 +16,8 @@ class User < ApplicationRecord
   # Will return an array of prizes for the task_child instance
   has_many :child_prizes, foreign_key: :prizeReceiverId, class_name: "Prize"
   
-  validates :name, :email, :password, :avatar, presence: true
+  validates :name, :email, :avatar, presence: true
+  validates :password, presence: true, on: :create
   validates :name, uniqueness: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 end
