@@ -26,6 +26,8 @@ class Api::V1::PrizesController < ApplicationController
   
   def update
     if @prize.update(prize_params)
+      @prize.name = @prize.name.titleize
+      @prize.save
       render json: @prize, status: 200
     else
       render json: { :errors => @prize.errors.full_messages }, status: :unprocessable_entity
